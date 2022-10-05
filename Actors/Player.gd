@@ -22,7 +22,7 @@ func _process(delta):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
-	if Input.is_action_pressed("jump"):
+	if Input.is_action_just_pressed("jump"):
 		player_jump = Vector2.UP * jump_weight
 	else:
 		player_jump = Vector2.ZERO

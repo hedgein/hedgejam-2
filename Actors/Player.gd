@@ -1,39 +1,34 @@
-extends Area2D
+extends KinematicBody2D
 
-#set up variables
-export var speed = 300 #pixels/sec
-export var weight = 600
-export var jump_weight = 1000
-var screen_size 
-var player_gravity: Vector2 
-var player_jump : Vector2
-var velocity: Vector2
+# the movement variables (mess around with them to make the movement the way you like)
+export (int) var speed = 300
+export (int) var jump_speed = -600
+export (int) var gravity = 1000
+export (float, 0, 1.0) var friction = 0.25
+export (float, 0, 1.0) var acceleration = 0.25
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	screen_size = get_viewport_rect().size
+var velocity = Vector2.ZERO
 
-
-
-func _process(delta):
-	velocity = Vector2.ZERO
-	player_gravity = Vector2.DOWN 
+# geting player input with our own function
+func get_input():
+	var dir = 0
 	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
+		dir += 1
 	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_just_pressed("jump"):
-		player_jump = Vector2.UP * jump_weight
+		dir -= 1
+	if dir != 0:
+		velocity.x = lerp(velocity.x, dir * speed, acceleration)
 	else:
-		player_jump = Vector2.ZERO
-		
-	if velocity.length() > 0:
-		player_gravity = player_gravity * weight
-		velocity = velocity.normalized() * speed
-	else:
-		player_gravity = player_gravity * weight
-		
-	position += (velocity + player_gravity + player_jump)* delta 
+		velocity.x = lerp(velocity.x, 0, friction)
 
-	position.x = clamp(position.x, 0, screen_size.x)
-	position.y = clamp(position.y, 0, screen_size.y)
+# and finaly calculating the movement
+func _physics_process(delta):
+	get_input()
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP)
+	if Input.is_action_pressed("move_up"):
+		if is_on_floor():
+			velocity.y = jump_speed
+	if Input.is_action_just_released("move_up"): # this will check to see if are jump key is released and stop the player jumping
+		if sign(velocity.y) != 1:
+			velocity.y = 0

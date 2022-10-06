@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Actors/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://main.gd" type="Script" id=2]
+[ext_resource path="res://7481714.jpg" type="Texture" id=3]
 
 [sub_resource type="QuadMesh" id=1]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 4.335, 1.825 )
+extents = Vector2( 12.02, 1.825 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 19.5, 19.5 )
@@ -17,6 +18,10 @@ extents = Vector2( 19.5, 19.5 )
 
 [node name="main" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="7481714" type="Sprite" parent="."]
+position = Vector2( 392, 124 )
+texture = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 559, 159 )
@@ -29,12 +34,12 @@ __meta__ = {
 }
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
-position = Vector2( 1.17575, -1.2 )
-scale = Vector2( 8.6685, 3.4 )
+position = Vector2( 0.989999, -1.2 )
+scale = Vector2( 24.08, 3.4 )
 mesh = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 1.185, -1.075 )
+position = Vector2( 1.01, -1.075 )
 scale = Vector2( 1, 1 )
 shape = SubResource( 2 )
 

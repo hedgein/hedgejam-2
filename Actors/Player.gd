@@ -8,7 +8,9 @@ export (float, 0, 1.0) var friction = 0.25
 export (float, 0, 1.0) var acceleration = 0.25
 
 var velocity = Vector2.ZERO
+var dark = false
 
+onready var darkness = $darkness
 # geting player input with our own function
 func get_input():
 	var dir = 0
@@ -23,12 +25,16 @@ func get_input():
 
 # and finaly calculating the movement
 func _physics_process(delta):
+	
 	get_input()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
-	if Input.is_action_pressed("move_up"):
+	if Input.is_action_just_pressed("move_up"):
+
 		if is_on_floor():
 			velocity.y = jump_speed
 	if Input.is_action_just_released("move_up"): # this will check to see if are jump key is released and stop the player jumping
 		if sign(velocity.y) != 1:
 			velocity.y = 0
+			
+			

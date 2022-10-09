@@ -18,3 +18,8 @@ shape = SubResource( 1 )
 position = Vector2( 57.75, 14.25 )
 scale = Vector2( 116.5, 29.5 )
 mesh = SubResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 116.0
+margin_bottom = 28.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )

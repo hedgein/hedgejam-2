@@ -1,20 +1,9 @@
 extends Node2D
-onready var darkness = $darkness
-var dark = false
 
-var light_level = 6
- 
-func _physics_process(delta):
-	
-	if Input.is_action_just_pressed("light_up"):
-	#adds a light level when the add button is pressed
-		light_level+=1
-		if light_level > 6:
-			light_level = 1
-	if Input.is_action_just_pressed("light_down"):
-	#subtracts a light level when the subtract button is pressed
-		light_level-=1
-		if light_level < 1:
-			light_level = 6
-	
-	
+var platform_scene = preload("res://platform.tscn")
+func _ready():
+	for i in range(-5,5):
+		var platform = platform_scene.instance()
+		add_child(platform)
+		platform.position.x = i*$Player.position.x
+		platform.position.y = 250

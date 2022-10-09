@@ -38,11 +38,11 @@ func _physics_process(delta):
 	get_input(delta)
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
-	if Input.is_action_pressed("move_up"):
+	if Input.is_action_pressed("jump"):
 
 		if is_on_floor():
 			velocity.y = jump_speed
-	if Input.is_action_just_released("move_up"): # this will check to see if are jump key is released and stop the player jumping
+	if Input.is_action_just_released("jump"): # this will check to see if are jump key is released and stop the player jumping
 		if sign(velocity.y) != 1:
 			velocity.y = 0
 			

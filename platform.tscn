@@ -9,6 +9,7 @@ extents = Vector2( 58.5, 14 )
 
 [node name="platform" type="StaticBody2D"]
 script = ExtResource( 1 )
+is_light = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 57.5, 14 )
